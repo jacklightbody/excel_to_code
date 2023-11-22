@@ -35,7 +35,7 @@ class ExcelToRuby < ExcelToX
     c = CompileToRuby.new
     c.settable = settable
 
-    c.rewrite(@formulae, @worksheet_c_names, o)
+    c.rewrite(@formulae, @worksheet_c_names, o, @values)
     o.puts
     
     # Output the named references
@@ -49,7 +49,7 @@ class ExcelToRuby < ExcelToX
       named_references_ast[c_name] = @named_references[ref] || @table_areas[ref]
     end
 
-    c.rewrite(named_references_ast, @worksheet_c_names, o)
+    c.rewrite(named_references_ast, @worksheet_c_names, o, @values)
 
     # Setters
     m = MapNamedReferenceToRubySetter.new
